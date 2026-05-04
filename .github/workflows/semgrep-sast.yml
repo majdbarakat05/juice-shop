@@ -1,0 +1,19 @@
+name: Semgrep SAST Scan
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  semgrep:
+    runs-on: ubuntu-latest
+    container:
+      image: returntocorp/semgrep
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Semgrep scan
+        run: semgrep scan --config auto
